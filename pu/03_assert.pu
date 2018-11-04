@@ -1,0 +1,22 @@
+@startuml
+title assert.exe
+'hide footbox
+
+participant "Yubikey" as Yubikey
+participant "assert.exe" as cred.exe
+
+cred.exe -> Yubikey: hid_open_path()
+cred.exe -> Yubikey: CTAPHID_INIT (0x06)
+cred.exe <-- Yubikey: Response
+note over cred.exe:CIDを取得
+cred.exe -> Yubikey: CTAPHID_CBOR (0x10)\nauthenticatorGetAssertion (0x02)\n 0x01 : rpid\n 0x02 : clientDataHash\n 0x03 : allowList\n 0x05 : options
+
+'note over Yubikey:ここでYubikeyがピカピカ光る
+'note over Yubikey:Yubikeyをタッチする
+|||
+
+cred.exe <-- Yubikey: Assertion(Response)\n 0x01 : credential\n 0x02 : authData\n 0x03 : signature
+note over cred.exe:Verify(検証)
+cred.exe -> Yubikey: hid_close()
+
+@enduml
