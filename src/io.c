@@ -54,6 +54,9 @@ tx_preamble(fido_dev_t *d,  uint8_t cmd, const void *buf, size_t count)
 	if (n < 0 || (size_t)n != sizeof(pkt))
 		return (0);
 
+	//log_debug("‘—MPacket");
+	//log_xxd(pkt+1, sizeof(pkt)-1);
+
 	return (count);
 }
 

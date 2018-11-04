@@ -526,10 +526,14 @@ fido_assert_verify(const fido_assert_t *assert, size_t idx, int cose_alg,
 		goto out;
 	}
 
-	if (ok < 0)
+	if (ok < 0) {
 		r = FIDO_ERR_INVALID_SIG;
-	else
+	}else{
 		r = FIDO_OK;
+		log_debug("%s: Verify-OK!", __func__);
+	}
+
+
 out:
 	explicit_bzero(buf, sizeof(buf));
 

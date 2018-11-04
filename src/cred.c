@@ -219,8 +219,11 @@ check_rp_id(const char *id, const unsigned char *obtained_hash)
 }
 
 static int
-get_signed_hash_packed(fido_blob_t *dgst, const fido_blob_t *clientdata,
-    const fido_blob_t *authdata_cbor)
+get_signed_hash_packed(
+		fido_blob_t *dgst,
+		const fido_blob_t *clientdata,
+		const fido_blob_t *authdata_cbor
+		)
 {
 	cbor_item_t		*item = NULL;
 	unsigned char		*authdata_ptr = NULL;
@@ -244,6 +247,7 @@ get_signed_hash_packed(fido_blob_t *dgst, const fido_blob_t *clientdata,
 	authdata_ptr = cbor_bytestring_handle(item);
 	authdata_len = cbor_bytestring_length(item);
 
+	// authdata_ptr + clientdata->ptr ⇒　SHA256ハッシュを作成　⇒　dgst
 	if (dgst->len != SHA256_DIGEST_LENGTH || SHA256_Init(&ctx) == 0 ||
 	    SHA256_Update(&ctx, authdata_ptr, authdata_len) == 0 ||
 	    SHA256_Update(&ctx, clientdata->ptr, clientdata->len) == 0 ||
@@ -251,6 +255,16 @@ get_signed_hash_packed(fido_blob_t *dgst, const fido_blob_t *clientdata,
 		log_debug("%s: sha256", __func__);
 		goto fail;
 	}
+
+	// PENDログ
+	log_debug("%s: authdata + clientdatahash ⇒　SHA256ハッシュを作成　⇒　dgst", __func__);
+	log_debug("authData(%d byte)",authdata_len);
+	log_xxd(authdata_ptr, authdata_len);
+	log_debug("clientdataHash(%d byte)",clientdata->len);
+	log_xxd(clientdata->ptr, clientdata->len);
+	log_debug("Dgst");
+	log_xxd(dgst->ptr, dgst->len);
+
 
 	ok = 0;
 fail:
@@ -286,8 +300,11 @@ get_signed_hash_u2f(fido_blob_t *dgst, const unsigned char *rp_id,
 }
 
 static int
-verify_sig(const fido_blob_t *dgst, const fido_blob_t *x5c,
-    const fido_blob_t *sig)
+verify_sig(
+			const fido_blob_t *dgst,
+			const fido_blob_t *x5c,
+			const fido_blob_t *sig
+			)
 {
 	BIO		*rawcert = NULL;
 	X509		*cert = NULL;
@@ -304,18 +321,62 @@ verify_sig(const fido_blob_t *dgst, const fido_blob_t *x5c,
 
 	/* fetch key from x509 */
 	if ((rawcert = BIO_new_mem_buf(x5c->ptr, (int)x5c->len)) == NULL ||
+		// 証明書バイトストリームから証明書構造体の生成
 	    (cert = d2i_X509_bio(rawcert, NULL)) == NULL ||
+		// 証明書情報から公開鍵を取り出す
 	    (pkey = X509_get_pubkey(cert)) == NULL ||
+		// EC KEYに変換
 	    (ec = EVP_PKEY_get0_EC_KEY(pkey)) == NULL) {
 		log_debug("%s: x509 key", __func__);
 		goto fail;
 	}
 
-	if (ECDSA_verify(0, dgst->ptr, (int)dgst->len, sig->ptr,
-	    (int)sig->len, ec) != 1) {
+	// PENDログ
+	log_debug("%s: x5cの最初の証明書(X509.DER証明書)", __func__);
+	log_debug("x5c(%d byte)", x5c->len);
+	log_xxd(x5c->ptr, x5c->len);
+
+	log_debug("dgst(%d byte)", dgst->len);
+	log_xxd(dgst->ptr, dgst->len);
+
+	log_debug("sig(%d byte)", sig->len);
+	log_xxd(sig->ptr, sig->len);
+
+	// ECDSA
+	// dgst と sig を検証する（ecを使う）
+	// 1.dgstをx5cから取り出した公開鍵で暗号化する⇒署名
+	// 2.この署名とsigを比較
+	// openssl でできる
+	if (ECDSA_verify(0,
+			dgst->ptr, (int)dgst->len,
+			sig->ptr,  (int)sig->len,
+			ec) != 1) {
 		log_debug("%s: ECDSA_verify", __func__);
 		goto fail;
 	}
+
+	// PEND
+	/*
+	ECDSA_SIG * sig2 = ECDSA_SIG_new();
+
+	sig2 = ECDSA_do_sign(
+		dgst->ptr, (int)dgst->len, ec);
+
+	//ECDSA_do_sign(const unsigned char *dgst, int dlen, EC_KEY *eckey)
+	*/
+
+	/*
+	unsigned char	buf2[SHA256_DIGEST_LENGTH];
+	fido_blob_t	dgst2;
+	dgst2.ptr = buf2;
+	dgst2.len = sizeof(buf2);
+	int ret = ECDSA_sign(0,
+		dgst2.ptr, (int)dgst2.len,
+		dgst->ptr, (int)dgst->len,
+		ec);
+		*/
+//	int ECDSA_sign(int type, const unsigned char *dgst, int dgstlen,
+//		unsigned char *sig, unsigned int *siglen, EC_KEY *eckey);
 
 	ok = 0;
 fail:
@@ -354,18 +415,21 @@ fido_cred_verify(const fido_cred_t *cred)
 		goto out;
 	}
 
+	// コマンドで送信したRPIDとレスポンスに含まれるRPIDハッシュを検証
 	if (check_rp_id(cred->rp.id, cred->authdata.rp_id_hash) != 0) {
 		log_debug("%s: check_rp_id", __func__);
 		r = FIDO_ERR_INVALID_PARAM;
 		goto out;
 	}
 
+	// UVがTrueであれば、レスポンスでUVチェックされているかどうか
 	if (check_flags(cred->authdata.flags, cred->uv) < 0) {
 		log_debug("%s: check_flags", __func__);
 		r = FIDO_ERR_INVALID_PARAM;
 		goto out;
 	}
 
+	// ???
 	if (check_extensions(cred->authdata_ext, cred->ext) < 0) {
 		log_debug("%s: check_extensions", __func__);
 		r = FIDO_ERR_INVALID_PARAM;
@@ -373,8 +437,13 @@ fido_cred_verify(const fido_cred_t *cred)
 	}
 
 	if (!strcmp(cred->fmt, "packed")) {
-		if (get_signed_hash_packed(&dgst, &cred->cdh,
-		    &cred->authdata_cbor) < 0) {
+		// 重要！：FIDO2の場合はこっち
+		// dgst（ダイジェスト）に値がセットされる
+		// authdata & cdh ⇒　SHA256ハッシュを作成　⇒　dgst
+		if (get_signed_hash_packed(
+							&dgst,
+							&cred->cdh,
+							&cred->authdata_cbor) < 0) {
 			log_debug("%s: get_signed_hash_packed", __func__);
 			r = FIDO_ERR_INTERNAL;
 			goto out;
@@ -389,6 +458,7 @@ fido_cred_verify(const fido_cred_t *cred)
 		}
 	}
 
+	// 署名(sig)を検証する
 	if (verify_sig(&dgst, &cred->attstmt.x5c, &cred->attstmt.sig) < 0) {
 		log_debug("%s: verify_sig", __func__);
 		r = FIDO_ERR_INVALID_SIG;

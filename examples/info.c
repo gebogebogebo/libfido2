@@ -154,7 +154,8 @@ getinfo(const char *path)
 	fido_cbor_info_t	*ci;
 	int			 r;
 
-	fido_init(0);
+	fido_init(FIDO_DEBUG);
+	//fido_init(0);
 
 	if ((dev = fido_dev_new()) == NULL)
 		errx(1, "fido_dev_new");
@@ -209,6 +210,9 @@ main(int argc, char **argv)
 		fprintf(stderr, "usage: info <device>\n");
 		exit(EXIT_FAILURE);
 	}
+
+	printf("info-start\r\n");
+	printf("<Device>=%s\r\n", argv[1]);
 
 	getinfo(argv[1]);
 

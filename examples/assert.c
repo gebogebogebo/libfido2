@@ -20,8 +20,10 @@
 #include "fido/es256.h"
 #include "fido/rs256.h"
 #include "extern.h"
+#include <openssl/sha.h>
 
-static const unsigned char cdh[32] = {
+//static const unsigned char cdh[32] = {
+static unsigned char cdh[32] = {
 	0xec, 0x8d, 0x8f, 0x78, 0x42, 0x4a, 0x2b, 0xb7,
 	0x82, 0x34, 0xaa, 0xca, 0x07, 0xa1, 0xf6, 0x56,
 	0x42, 0x1c, 0xb6, 0xf6, 0xb3, 0x00, 0x86, 0x52,
@@ -38,9 +40,13 @@ usage(void)
 }
 
 static void
-verify_assert(int type, const unsigned char *authdata_ptr, size_t authdata_len,
-    const unsigned char *sig_ptr, size_t sig_len, bool up, bool uv, int ext,
-    const char *key)
+verify_assert(
+		int type,
+		const unsigned char *authdata_ptr, size_t authdata_len,
+		const unsigned char *sig_ptr, size_t sig_len, 
+		bool up, bool uv, int ext,
+		const char *key
+		)
 {
 	fido_assert_t	*assert = NULL;
 	EC_KEY		*ec = NULL;
@@ -89,7 +95,8 @@ verify_assert(int type, const unsigned char *authdata_ptr, size_t authdata_len,
 		    fido_strerr(r), r);
 
 	/* relying party */
-	r = fido_assert_set_rp(assert, "localhost");
+	//r = fido_assert_set_rp(assert, "localhost");
+	r = fido_assert_set_rp(assert, "gebo.com");
 	if (r != FIDO_OK)
 		errx(1, "fido_assert_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -204,7 +211,26 @@ main(int argc, char **argv)
 	if (argc != 2)
 		usage();
 
-	fido_init(0);
+	// ClientDataHashÇçÏê¨
+	// byte[32]
+	{
+		byte randombuf[33];
+		//byte rundomsha256[SHA256_DIGEST_LENGTH];
+
+		printf("RAND_MAX=%d\n", RAND_MAX);
+		srand((unsigned)time(NULL));
+		printf("%32d\n", rand());
+		sprintf((char*)randombuf, "%32d", rand());
+
+		SHA256_CTX		 ctx;
+		if (SHA256_Init(&ctx) == 0 ||
+			SHA256_Update(&ctx, randombuf, sizeof(randombuf)-1) == 0 ||
+			SHA256_Final(cdh, &ctx) == 0) {
+			errx(1, "ClientDataHashçÏê¨Error");
+		}
+	}
+
+	fido_init(FIDO_DEBUG);
 
 	if ((dev = fido_dev_new()) == NULL)
 		errx(1, "fido_dev_new");
@@ -215,6 +241,7 @@ main(int argc, char **argv)
 	if (u2f)
 		fido_dev_force_u2f(dev);
 
+
 	/* client data hash */
 	r = fido_assert_set_clientdata_hash(assert, cdh, sizeof(cdh));
 	if (r != FIDO_OK)
@@ -222,7 +249,8 @@ main(int argc, char **argv)
 		    fido_strerr(r), r);
 
 	/* relying party */
-	r = fido_assert_set_rp(assert, "localhost");
+	//r = fido_assert_set_rp(assert, "localhost");
+	r = fido_assert_set_rp(assert, "gebo.com");
 	if (r != FIDO_OK)
 		errx(1, "fido_assert_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -250,9 +278,13 @@ main(int argc, char **argv)
 		errx(1, "fido_assert_count: %d signatures returned",
 		    (int)fido_assert_count(assert));
 
-	verify_assert(type, fido_assert_authdata_ptr(assert, 0),
-	    fido_assert_authdata_len(assert, 0), fido_assert_sig_ptr(assert, 0),
-	    fido_assert_sig_len(assert, 0), up, uv, ext, argv[0]);
+	verify_assert(
+		type,
+		fido_assert_authdata_ptr(assert, 0),
+	    fido_assert_authdata_len(assert, 0),
+		fido_assert_sig_ptr(assert, 0),
+	    fido_assert_sig_len(assert, 0), 
+		up, uv, ext, argv[0]);
 
 	if (hmac_out != NULL) {
 		/* extract the hmac secret */

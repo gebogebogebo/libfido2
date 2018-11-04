@@ -1,4 +1,5 @@
-set "PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\MSBuild\15.0\Bin"
+set "PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin"
+set "PATH=%PATH%;C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin"
 
 echo "building hidapi"
 git clone --branch hidapi-0.8.0-rc1 https://github.com/signal11/hidapi C:\hidapi-Win64

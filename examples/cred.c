@@ -43,9 +43,15 @@ usage(void)
 }
 
 static void
-verify_cred(int type, const char *fmt, const unsigned char *authdata_ptr,
-    size_t authdata_len, const unsigned char *x509_ptr, size_t x509_len,
-    const unsigned char *sig_ptr, size_t sig_len, bool rk, bool uv, int ext,
+verify_cred(
+		int type,		// 暗号化alg
+		const char *fmt, 
+		const unsigned char *authdata_ptr,size_t authdata_len, 
+		const unsigned char *x509_ptr, size_t x509_len,
+		const unsigned char *sig_ptr, size_t sig_len, 
+		bool rk,	// Resident Key
+		bool uv,	// verification
+		int ext,	// extensions(HMAC)
     const char *key_out, const char *id_out)
 {
 	fido_cred_t	*cred;
@@ -66,7 +72,8 @@ verify_cred(int type, const char *fmt, const unsigned char *authdata_ptr,
 		    fido_strerr(r), r);
 
 	/* relying party */
-	r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
+	//r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
+	r = fido_cred_set_rp(cred, "gebo.com", "gebo");
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -100,6 +107,7 @@ verify_cred(int type, const char *fmt, const unsigned char *authdata_ptr,
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_fmt: %s (0x%x)", fido_strerr(r), r);
 
+	// クレデンシャルの検証
 	r = fido_cred_verify(cred);
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_verify: %s (0x%x)", fido_strerr(r), r);
@@ -173,9 +181,11 @@ main(int argc, char **argv)
 			key_out = optarg;
 			break;
 		case 'r':
+			// rk (Resident Key)
 			rk = true;
 			break;
 		case 't':
+			// pubKeyCredParamsのalgを指定する
 			if (strcmp(optarg, "ecdsa") == 0)
 				type = COSE_ES256;
 			else if (strcmp(optarg, "rsa") == 0)
@@ -187,6 +197,7 @@ main(int argc, char **argv)
 			u2f = true;
 			break;
 		case 'v':
+			// uv (User Verification)
 			uv = true;
 			break;
 		default:
@@ -200,7 +211,8 @@ main(int argc, char **argv)
 	if (argc != 1)
 		usage();
 
-	fido_init(0);
+	fido_init(FIDO_DEBUG);
+	//fido_init(0);
 
 	if ((dev = fido_dev_new()) == NULL)
 		errx(1, "fido_dev_new");
@@ -210,6 +222,8 @@ main(int argc, char **argv)
 	if (u2f)
 		fido_dev_force_u2f(dev);
 
+	// pubKeyCredParamsのalgを指定する
+	// -t
 	/* type */
 	r = fido_cred_set_type(cred, type);
 	if (r != FIDO_OK)
@@ -222,7 +236,8 @@ main(int argc, char **argv)
 		    fido_strerr(r), r);
 
 	/* relying party */
-	r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
+	//r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
+	r = fido_cred_set_rp(cred, "gebo.com", "gebo");
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -238,6 +253,8 @@ main(int argc, char **argv)
 		errx(1, "fido_cred_set_extensions: %s (0x%x)", fido_strerr(r), r);
 
 	/* options */
+	// rk=resident key(デバイスの中にキー情報を保存するオプション-デフォルトFalse)
+	// uv=user verification(指紋とかPINのジェスチャ要求デフォルトfalse)
 	r = fido_cred_set_options(cred, rk, uv);
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_options: %s (0x%x)", fido_strerr(r), r);
@@ -251,10 +268,17 @@ main(int argc, char **argv)
 
 	fido_dev_free(&dev);
 
-	verify_cred(type, fido_cred_fmt(cred), fido_cred_authdata_ptr(cred),
-	    fido_cred_authdata_len(cred), fido_cred_x5c_ptr(cred),
-	    fido_cred_x5c_len(cred), fido_cred_sig_ptr(cred),
-	    fido_cred_sig_len(cred), rk, uv, ext, key_out, id_out);
+	verify_cred(
+		type,
+		fido_cred_fmt(cred),
+		fido_cred_authdata_ptr(cred),
+	    fido_cred_authdata_len(cred),
+		fido_cred_x5c_ptr(cred),
+	    fido_cred_x5c_len(cred),
+		fido_cred_sig_ptr(cred),
+	    fido_cred_sig_len(cred), 
+		rk, uv, ext, key_out, id_out
+	);
 
 	fido_cred_free(&cred);
 
