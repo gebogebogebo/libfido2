@@ -27,33 +27,31 @@ group SetPIN
 end
 
 group Create
+    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getKeyAgreement
+    Client <-- Yubikey:keyAgreement
 
-Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getKeyAgreement
-Client <-- Yubikey:keyAgreement
+    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getPINToken
+    Client <-- Yubikey:pinToken
+    |||
+    Client -> Yubikey: 【authenticatorMakeCredential(0x01)】\n clientDataHash\n **rp(rpid)**\n **user(userID)**\n pubKeyCredParams\n options(**rk=true**,uv=true)\n pinAuth\n pinProtocol
 
-Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getPINToken
-Client <-- Yubikey:pinToken
+    note over Yubikey:UserPresence Ready
+    User -> Yubikey :Touch Yubikey
 
-|||
+    note over Yubikey:UserPresence OK
 
-Client -> Yubikey: 【authenticatorMakeCredential(0x01)】\n clientDataHash\n **rp(rpid)**\n **user(userID)**\n pubKeyCredParams\n options(**rk=true**,uv=true)\n pinAuth\n pinProtocol
+    note over Yubikey:【Credential】\n ◆PK:rpid & CredentialID\n ・CredentialPrivateKey\n ・**user(userID)**
 
-note over Yubikey:UserPresence Ready
-User -> Yubikey :Touch Yubikey
-
-note over Yubikey:UserPresence OK
-
-note over Yubikey:【Credential】\n ◆PK:rpid & CredentialID\n ・CredentialPrivateKey\n ・**user(userID)**
-
-Client <-- Yubikey: 【Attestation】\n fmt\n authData\n    (CredentialID,CredentialPublicKey)\n attStmt
-note over Client:Verify
-
+    Client <-- Yubikey: 【Attestation】\n fmt\n authData\n    (CredentialID,CredentialPublicKey)\n attStmt
+    note over Client:Verify
 end 
 
 Client -> Database :【UPDATE Table】\n CredentialPublicKey
 note over Database:【Table】\n ◆PK:UserID\n ・PIN\n ・CredentialPublicKey
 
 ==  ==
+
+note over Auth:つくりかけ！
 
 User <- Client : Who are You?
 activate Auth
