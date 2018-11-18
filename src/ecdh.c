@@ -10,8 +10,13 @@
 #include "fido.h"
 #include "fido/es256.h"
 
+// ここで生成した秘密鍵sk , 取得した公開鍵pk
+// ecdh = Shered Secret
 static int
-do_ecdh(const es256_sk_t *sk, const es256_pk_t *pk, fido_blob_t **ecdh)
+do_ecdh(
+		const es256_sk_t *sk,		// (I )ここで生成した秘密鍵
+		const es256_pk_t *pk,		// (I )Yubikeyから取得した公開鍵
+		fido_blob_t **ecdh)			// ( O)生成したShered Secret
 {
 	EVP_PKEY	*pk_evp = NULL;
 	EVP_PKEY	*sk_evp = NULL;
@@ -26,6 +31,9 @@ do_ecdh(const es256_sk_t *sk, const es256_pk_t *pk, fido_blob_t **ecdh)
 	    (*ecdh = fido_blob_new()) == NULL)
 		goto fail;
 
+	// OpenSSLのEVP形式に変換する
+	// sk -> sk_evp
+	// pk -> pk_evp
 	/* wrap the keys as openssl objects */
 	if ((pk_evp = es256_pk_to_EVP_PKEY(pk)) == NULL ||
 	    (sk_evp = es256_sk_to_EVP_PKEY(sk)) == NULL) {
@@ -33,15 +41,26 @@ do_ecdh(const es256_sk_t *sk, const es256_pk_t *pk, fido_blob_t **ecdh)
 		goto fail;
 	}
 
+	// 共有鍵生成
+	// EVP_PKEY_derive_init() -> EVP_PKEY_derive_set_peer() -> EVP_PKEY_derive()
+
+	// sk_evp⇒ ctx + pk_evp
+	// EVP_PKEY_CTX_new()			公開鍵暗号コンテキスト ctx を 鍵 sk_evp で指定されるアルゴリズムを用いて生成する
+	// EVP_PKEY_derive_init()		共有鍵生成:公開鍵暗号コンテキスト ctx を共有鍵生成用に初期化する．
+	// EVP_PKEY_derive_set_peer()	共有鍵生成:公開鍵暗号コンテキスト ctx に公開情報 peer (pk_evp)を設定する．
 	/* set ecdh parameters */
-	if ((ctx = EVP_PKEY_CTX_new(sk_evp, NULL)) == NULL ||
-	    EVP_PKEY_derive_init(ctx) <= 0 ||
-	    EVP_PKEY_derive_set_peer(ctx, pk_evp) <= 0) {
+	if (
+		(ctx =	EVP_PKEY_CTX_new(sk_evp, NULL)) == NULL ||
+				EVP_PKEY_derive_init(ctx) <= 0 ||
+				EVP_PKEY_derive_set_peer(ctx, pk_evp) <= 0) {
 		log_debug("%s: EVP_PKEY_derive_init", __func__);
 		goto fail;
 	}
 
 	/* perform ecdh */
+	// EVP_PKEY_derive()
+	//		公開鍵暗号コンテキスト ctx を用いて共有鍵生成を行う
+	//		生成された鍵が secret
 	if (EVP_PKEY_derive(ctx, NULL, &secret->len) <= 0 ||
 	    (secret->ptr = calloc(1, secret->len)) == NULL ||
 	    EVP_PKEY_derive(ctx, secret->ptr, &secret->len) <= 0) {
@@ -50,6 +69,7 @@ do_ecdh(const es256_sk_t *sk, const es256_pk_t *pk, fido_blob_t **ecdh)
 	}
 
 	/* use sha256 as a kdf on the resulting secret */
+	// ↑で生成されたsecretのSHA256がecdh = Shered Secretとなる
 	(*ecdh)->len = SHA256_DIGEST_LENGTH;
 	if (((*ecdh)->ptr = calloc(1, (*ecdh)->len)) == NULL ||
 	    SHA256(secret->ptr, secret->len, (*ecdh)->ptr) == NULL) {
@@ -74,7 +94,11 @@ fail:
 }
 
 int
-fido_do_ecdh(fido_dev_t *dev, es256_pk_t **pk, fido_blob_t **ecdh)
+fido_do_ecdh(
+		fido_dev_t *dev,
+		es256_pk_t **pk,		// ( O)ここで生成した公開鍵(bG)
+		fido_blob_t **ecdh		// ( O)Sheared Secret
+		)
 {
 	es256_sk_t	*sk = NULL; /* our private key */
 	es256_pk_t	*ak = NULL; /* authenticator's public key */
@@ -88,12 +112,16 @@ fido_do_ecdh(fido_dev_t *dev, es256_pk_t **pk, fido_blob_t **ecdh)
 		goto fail;
 	}
 
+	// sk=秘密鍵(b)とpk=公開鍵(bG)を生成
+	//  ECDH P-256 key pair
 	if (es256_sk_create(sk) < 0 || es256_derive_pk(sk, *pk) < 0) {
 		log_debug("%s: es256_derive_pk", __func__);
 		r = FIDO_ERR_INTERNAL;
 		goto fail;
 	}
 
+	// ここでgetKeyAgreementコマンド送信して応答を得る
+	// ak変数にKeyAgreement(公開鍵aG)
 	if ((ak = es256_pk_new()) == NULL ||
 	    fido_dev_authkey(dev, ak) != FIDO_OK) {
 		log_debug("%s: fido_dev_authkey", __func__);
@@ -101,6 +129,8 @@ fido_do_ecdh(fido_dev_t *dev, es256_pk_t **pk, fido_blob_t **ecdh)
 		goto fail;
 	}
 
+	// ここで生成した秘密鍵sk , 取得した公開鍵ak
+	// をもとに sharedSecret を生成する
 	if (do_ecdh(sk, ak, ecdh) < 0) {
 		log_debug("%s: do_ecdh", __func__);
 		r = FIDO_ERR_INTERNAL;

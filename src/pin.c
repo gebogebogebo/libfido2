@@ -229,7 +229,7 @@ fido_dev_set_pin_tx(fido_dev_t *dev, const char *pin)
 {
 	fido_blob_t	 f;
 	fido_blob_t	*ppin = NULL;
-	fido_blob_t	*ecdh = NULL;
+	fido_blob_t	*ecdh = NULL;		// sharedSecret
 	cbor_item_t	*argv[5];
 	es256_pk_t	*pk = NULL;
 	int		 r;
@@ -237,21 +237,46 @@ fido_dev_set_pin_tx(fido_dev_t *dev, const char *pin)
 	memset(&f, 0, sizeof(f));
 	memset(argv, 0, sizeof(argv));
 
+	// PINを64Byteにパディングする(後方スペース)
 	if ((r = pad64(pin, &ppin)) != FIDO_OK) {
 		log_debug("%s: pad64", __func__);
 		goto fail;
 	}
 
+	// 0x02:getKeyAgreementしてKeyAgreementを取得する
+	// KeyAgreementからsharedSecretを生成する
+	// es256_pk_t **pk,			// ( O)ここで生成した公開鍵(bG)
+	// fido_blob_t **ecdh		// ( O)★Sheared Secret
 	if ((r = fido_do_ecdh(dev, &pk, &ecdh)) != FIDO_OK) {
 		log_debug("%s: fido_do_ecdh", __func__);
 		goto fail;
 	}
 
+	// 
 	if ((argv[0] = cbor_build_uint8(1)) == NULL ||
-	    (argv[1] = cbor_build_uint8(3)) == NULL ||
-	    (argv[2] = es256_pk_encode(pk)) == NULL ||
-	    (argv[3] = encode_set_pin_auth(ecdh, ppin)) == NULL ||
-	    (argv[4] = encode_pin_enc(ecdh, ppin)) == NULL) {
+		(argv[1] = cbor_build_uint8(3)) == NULL) {
+		log_debug("%s: cbor encode", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	// パラメータ 0x03:keyAgreement
+	// platformKeyAgreementKeyの公開鍵、つまりbGを指定します。
+	if ((argv[2] = es256_pk_encode(pk)) == NULL ) {
+		log_debug("%s: cbor encode", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	// パラメータ 0x04:pinAuth
+	if ((argv[3] = encode_set_pin_auth(ecdh, ppin)) == NULL) {
+		log_debug("%s: cbor encode", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	// パラメータ 0x05:newPinEnc
+	if ((argv[4] = encode_pin_enc(ecdh, ppin)) == NULL) {
 		log_debug("%s: cbor encode", __func__);
 		r = FIDO_ERR_INTERNAL;
 		goto fail;

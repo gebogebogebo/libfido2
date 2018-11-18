@@ -30,7 +30,7 @@ main(int argc, char **argv)
 		exit(EXIT_FAILURE);
 	}
 
-	fido_init(0);
+	fido_init(FIDO_DEBUG);
 
 	if ((dev = fido_dev_new()) == NULL)
 		errx(1, "fido_dev_new");

@@ -1,0 +1,88 @@
+@startuml
+title usecase_02 
+'hide footbox
+
+participant "Two-Factor Authentication" as Auth
+actor "User" as User
+participant "Yubikey" as Yubikey
+participant "Client" as Client
+database "Database" as Database
+
+User <- Client : Please Insert Yubikey!
+User --> Client : Insert Yubikey
+Yubikey <-- Client : Connect
+
+group SetPIN
+    User <- Client : Please Set PIN
+    User --> Client : Input PIN
+
+    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n    subCommand : getKeyAgreement
+    Client <-- Yubikey:keyAgreement
+
+    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n    subCommand : setPIN\n    keyAgreement \n    pinAuth\n    newPinEnc
+    Client <-- Yubikey: 
+
+    Client -> Database :【INSERT Table】\n PIN
+    note over Database:【Table】\n ◆PK:UserID\n ・PIN
+end
+
+group Create
+
+Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getKeyAgreement
+Client <-- Yubikey:keyAgreement
+
+Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getPINToken
+Client <-- Yubikey:pinToken
+
+|||
+
+Client -> Yubikey: 【authenticatorMakeCredential(0x01)】\n clientDataHash\n **rp(rpid)**\n **user(userID)**\n pubKeyCredParams\n options(**rk=true**,uv=true)\n pinAuth\n pinProtocol
+
+note over Yubikey:UserPresence Ready
+User -> Yubikey :Touch Yubikey
+
+note over Yubikey:UserPresence OK
+
+note over Yubikey:【Credential】\n ◆PK:rpid & CredentialID\n ・CredentialPrivateKey\n ・**user(userID)**
+
+Client <-- Yubikey: 【Attestation】\n fmt\n authData\n    (CredentialID,CredentialPublicKey)\n attStmt
+note over Client:Verify
+
+end 
+
+Client -> Database :【UPDATE Table】\n CredentialPublicKey
+note over Database:【Table】\n ◆PK:UserID\n ・PIN\n ・CredentialPublicKey
+
+==  ==
+
+User <- Client : Who are You?
+activate Auth
+note over Auth:what you know
+User --> Client : My UserID is gebo and password is xxxx
+deactivate Auth
+Client -> Database : **SELECT from Table**
+note over Database:【Table】\n ◆PK:UserID → **CredentialID**
+Client <-- Database : **CredentialID**
+
+User <- Client : Please Insert Yubikey!
+User --> Client : Insert Yubikey
+Yubikey <-- Client : Connect
+
+group Authentication
+
+activate Auth
+note over Auth:what you have
+Client -> Yubikey : 【authenticatorGetAssertion(0x02)】\n 0x01 : rpid\n 0x02 : clientDataHash\n 0x03 : allowList(**CredentialID**)\n 0x05 : options(up=false,uv=false)
+
+note over Yubikey:【Search Credential】\n ◆PK:rpid & **CredentialID** \n→ CredentialPrivateKey
+
+Client <-- Yubikey: Assertion\n 0x01 : credentia(**CredentialID**)\n 0x02 : authData\n 0x03 : signature(Signed with PrivateKey)
+deactivate Auth
+
+Client <- Database : CredentialPublicKey
+
+note over Client:Verify Signature \nwith CredentialPublicKey
+
+end
+
+@enduml

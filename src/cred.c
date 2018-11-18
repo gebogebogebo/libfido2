@@ -94,12 +94,19 @@ fido_dev_make_cred_tx(fido_dev_t *dev, fido_cred_t *cred, const char *pin)
 
 	/* pin authentication */
 	if (pin) {
+		// Shared Secret‚ð¶¬‚·‚é
+		// ecdh
 		if ((r = fido_do_ecdh(dev, &pk, &ecdh)) != FIDO_OK) {
 			log_debug("%s: fido_do_ecdh", __func__);
 			goto fail;
 		}
-		if ((r = add_cbor_pin_params(dev, &cred->cdh, pk, ecdh, pin,
-		    &argv[7], &argv[8])) != FIDO_OK) {
+		if ((r = add_cbor_pin_params(
+					dev, 
+					&cred->cdh, 
+					pk,
+					ecdh, 
+					pin,
+				    &argv[7], &argv[8])) != FIDO_OK) {
 			log_debug("%s: add_cbor_pin_params", __func__);
 			goto fail;
 		}

@@ -10,7 +10,11 @@
 #include "fido.h"
 
 int
-aes256_cbc_enc(const fido_blob_t *key, const fido_blob_t *in, fido_blob_t *out)
+aes256_cbc_enc(
+	const fido_blob_t *	key,			// (I )Shared Secret(32byte)
+	const fido_blob_t *	in,				// (I )暗号化したいデータ(16byte)
+	fido_blob_t *		out				// ( O)暗号化されたデータ
+	)
 {
 	EVP_CIPHER_CTX	*ctx = NULL;
 	unsigned char	 iv[32];
@@ -28,7 +32,8 @@ aes256_cbc_enc(const fido_blob_t *key, const fido_blob_t *in, fido_blob_t *out)
 		goto fail;
 	}
 
-	if ((ctx = EVP_CIPHER_CTX_new()) == NULL || key->len != 32 ||
+	if (
+		(ctx = EVP_CIPHER_CTX_new()) == NULL || key->len != 32 ||
 	    !EVP_EncryptInit_ex(ctx, EVP_aes_256_cbc(), NULL, key->ptr, iv) ||
 	    !EVP_CIPHER_CTX_set_padding(ctx, 0) ||
 	    !EVP_EncryptUpdate(ctx, out->ptr, &len, in->ptr, (int)in->len) ||

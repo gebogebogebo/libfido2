@@ -96,7 +96,7 @@ verify_assert(
 
 	/* relying party */
 	//r = fido_assert_set_rp(assert, "localhost");
-	r = fido_assert_set_rp(assert, "gebo.com");
+	r = fido_assert_set_rp(assert, "gebo6.com");
 	if (r != FIDO_OK)
 		errx(1, "fido_assert_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -250,7 +250,7 @@ main(int argc, char **argv)
 
 	/* relying party */
 	//r = fido_assert_set_rp(assert, "localhost");
-	r = fido_assert_set_rp(assert, "gebo.com");
+	r = fido_assert_set_rp(assert, "gebo6.com");
 	if (r != FIDO_OK)
 		errx(1, "fido_assert_set_rp: %s (0x%x)", fido_strerr(r), r);
 

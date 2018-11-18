@@ -73,7 +73,7 @@ verify_cred(
 
 	/* relying party */
 	//r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
-	r = fido_cred_set_rp(cred, "gebo.com", "gebo");
+	r = fido_cred_set_rp(cred, "gebo6.com", "gebo6");
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -123,14 +123,18 @@ verify_cred(
 			    fido_cred_pubkey_len(cred)) < 0)
 				errx(1, "write_rsa_pubkey");
 		}
+		printf("----\n");
+		printf("Export PublicKey OK:(%dbyte) ->%s\n", fido_cred_pubkey_len(cred), key_out);
 	}
 
 	if (id_out != NULL) {
 		/* extract the credential id */
-		if (write_blob(id_out, fido_cred_id_ptr(cred),
-		    fido_cred_id_len(cred)) < 0)
+		if (write_blob(id_out, fido_cred_id_ptr(cred), fido_cred_id_len(cred)) < 0) {
 			errx(1, "write_blob");
-	}
+		}
+		printf("----\n");
+		printf("Export CredentialID OK:(%dbyte) ->%s\n", fido_cred_id_len(cred), id_out);
+	} 
 
 	fido_cred_free(&cred);
 }
@@ -237,13 +241,19 @@ main(int argc, char **argv)
 
 	/* relying party */
 	//r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
-	r = fido_cred_set_rp(cred, "gebo.com", "gebo");
+	r = fido_cred_set_rp(cred, "gebo6.com", "gebo6");
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_rp: %s (0x%x)", fido_strerr(r), r);
 
 	/* user */
-	r = fido_cred_set_user(cred, user_id, sizeof(user_id), "john smith",
-	    "jsmith", NULL);
+//	r = fido_cred_set_user(cred, user_id, sizeof(user_id), "john smith",
+//	    "jsmith", NULL);
+
+	//const unsigned char gebo_id[8] = {
+	//	0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x66
+	//};
+	r = fido_cred_set_user(cred, user_id, sizeof(user_id), "gebo-bo6",
+	    "gebo-bo6", NULL);
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_user: %s (0x%x)", fido_strerr(r), r);
 
@@ -259,6 +269,7 @@ main(int argc, char **argv)
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_options: %s (0x%x)", fido_strerr(r), r);
 
+	// pin‚ğˆø”‚É“n‚·
 	r = fido_dev_make_cred(dev, cred, pin);
 	if (r != FIDO_OK)
 		errx(1, "fido_makecred: %s (0x%x)", fido_strerr(r), r);

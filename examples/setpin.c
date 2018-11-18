@@ -25,7 +25,7 @@ setpin(const char *path, const char *pin, const char *oldpin)
 	fido_dev_t *dev;
 	int r;
 
-	fido_init(0);
+	fido_init(FIDO_DEBUG);
 
 	if ((dev = fido_dev_new()) == NULL)
 		errx(1, "fido_dev_new");

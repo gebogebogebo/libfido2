@@ -593,7 +593,10 @@ fail:
 }
 
 cbor_item_t *
-encode_set_pin_auth(const fido_blob_t *key, const fido_blob_t *pin)
+encode_set_pin_auth(
+			const fido_blob_t *key,			// (I )SharedSecret(32byte)
+			const fido_blob_t *pin			// (I )PIN　文字列
+			)
 {
 	const EVP_MD	*md = NULL;
 	unsigned char	 dgst[SHA256_DIGEST_LENGTH];
@@ -604,14 +607,20 @@ encode_set_pin_auth(const fido_blob_t *key, const fido_blob_t *pin)
 	if ((pe = fido_blob_new()) == NULL)
 		goto fail;
 
+	// pinをkeyでエンコードする⇒pe
 	if (aes256_cbc_enc(key, pin, pe) < 0) {
 		log_debug("%s: aes256_cbc_enc", __func__);
 		goto fail;
 	}
 
-	if ((md = EVP_sha256()) == NULL || key->len != 32 || HMAC(md, key->ptr,
-	    (int)key->len, pe->ptr, (int)pe->len, dgst, &dgst_len) == NULL ||
-	    dgst_len != SHA256_DIGEST_LENGTH) {
+	// HMAC( key , pe ) -> dgst(32byte)
+	if (
+		(md = EVP_sha256()) == NULL ||
+		key->len != 32 ||
+		HMAC(md, key->ptr,(int)key->len, pe->ptr, (int)pe->len, dgst, &dgst_len) == NULL ||
+		dgst_len != SHA256_DIGEST_LENGTH
+		) 
+	{
 		log_debug("%s: HMAC", __func__);
 		goto fail;
 	}
@@ -633,6 +642,7 @@ encode_pin_hash_enc(const fido_blob_t *shared, const fido_blob_t *pin)
 	if ((ph = fido_blob_new()) == NULL || (phe = fido_blob_new()) == NULL)
 		goto fail;
 
+	// SHA-256(pin)
 	if (sha256(pin->ptr, pin->len, ph) < 0 || ph->len < 16) {
 		log_debug("%s: SHA256", __func__);
 		goto fail;
@@ -640,6 +650,7 @@ encode_pin_hash_enc(const fido_blob_t *shared, const fido_blob_t *pin)
 
 	ph->len = 16; /* first 16 bytes */
 
+	// AES256-CBC(sharedSecret, IV=0, LEFT(SHA-256(curPin),16)).
 	if (aes256_cbc_enc(shared, ph, phe) < 0) {
 		log_debug("%s: aes256_cbc_enc", __func__);
 		goto fail;
