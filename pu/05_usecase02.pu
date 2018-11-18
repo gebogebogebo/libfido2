@@ -5,25 +5,21 @@ title usecase_02
 participant "Two-Factor Authentication" as Auth
 actor "User" as User
 participant "Yubikey" as Yubikey
-participant "Client" as Client
-database "Database" as Database
+box "gebo-Service"
+    participant "Client" as Client
+    database "Database" as Database
+end box 
 
 User <- Client : Please Insert Yubikey!
 User --> Client : Insert Yubikey
 Yubikey <-- Client : Connect
 
 group SetPIN
-    User <- Client : Please Set PIN
-    User --> Client : Input PIN
-
-    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n    subCommand : getKeyAgreement
+    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getKeyAgreement
     Client <-- Yubikey:keyAgreement
 
-    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n    subCommand : setPIN\n    keyAgreement \n    pinAuth\n    newPinEnc
+    Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : setPIN\n keyAgreement \n pinAuth\n newPinEnc(PIN=GEBO)
     Client <-- Yubikey: 
-
-    Client -> Database :【INSERT Table】\n PIN
-    note over Database:【Table】\n ◆PK:UserID\n ・PIN
 end
 
 group Create
@@ -33,7 +29,7 @@ group Create
     Client -> Yubikey:【authenticatorClientPIN(0x06)】\n subCommand : getPINToken
     Client <-- Yubikey:pinToken
     |||
-    Client -> Yubikey: 【authenticatorMakeCredential(0x01)】\n clientDataHash\n **rp(rpid)**\n **user(userID)**\n pubKeyCredParams\n options(**rk=true**,uv=true)\n pinAuth\n pinProtocol
+    Client -> Yubikey: 【authenticatorMakeCredential(0x01)】\n clientDataHash\n **rp(rpid=GEBO-Service)**\n **user(userID)**\n pubKeyCredParams\n options(**rk=true**,uv=true)\n pinAuth(PIN=GEBO)\n pinProtocol
 
     note over Yubikey:UserPresence Ready
     User -> Yubikey :Touch Yubikey
@@ -47,40 +43,37 @@ group Create
 end 
 
 Client -> Database :【UPDATE Table】\n CredentialPublicKey
-note over Database:【Table】\n ◆PK:UserID\n ・PIN\n ・CredentialPublicKey
+note over Database:【Table】\n ◆PK:UserID\n ・CredentialPublicKey
 
 ==  ==
 
 note over Auth:つくりかけ！
 
 User <- Client : Who are You?
-activate Auth
-note over Auth:what you know
-User --> Client : My UserID is gebo and password is xxxx
-deactivate Auth
-Client -> Database : **SELECT from Table**
-note over Database:【Table】\n ◆PK:UserID → **CredentialID**
-Client <-- Database : **CredentialID**
-
-User <- Client : Please Insert Yubikey!
 User --> Client : Insert Yubikey
 Yubikey <-- Client : Connect
 
 group Authentication
+    activate Auth
+    note over Auth:what you have
+    Client -> Yubikey : 【authenticatorGetAssertion(0x02)】\n 0x01 : rpid\n 0x02 : clientDataHash\n 0x05 : options(up=false,uv=true)
 
-activate Auth
-note over Auth:what you have
-Client -> Yubikey : 【authenticatorGetAssertion(0x02)】\n 0x01 : rpid\n 0x02 : clientDataHash\n 0x03 : allowList(**CredentialID**)\n 0x05 : options(up=false,uv=false)
+    note over Yubikey:【Search Credential】\n ◆rpid \n→ user & CredentialPrivateKey
 
-note over Yubikey:【Search Credential】\n ◆PK:rpid & **CredentialID** \n→ CredentialPrivateKey
+    Client <-- Yubikey: Assertion\n 0x01 : credential\n 0x02 : authData\n 0x03 : signature(Signed with PrivateKey)\n 0x04 : user(UserID)
+    Client -> Database : **SELECT from Table**
+    note over Database:【Table】\n ◆PK:UserID → **CredentialPublicKey**
+    Client <-- Database : **CredentialPublicKey**
 
-Client <-- Yubikey: Assertion\n 0x01 : credentia(**CredentialID**)\n 0x02 : authData\n 0x03 : signature(Signed with PrivateKey)
-deactivate Auth
-
-Client <- Database : CredentialPublicKey
-
-note over Client:Verify Signature \nwith CredentialPublicKey
-
+    note over Client:Verify Signature \nwith CredentialPublicKey
+    deactivate Auth
 end
+
+User <- Client : Enter a Password
+activate Auth
+note over Auth:what you know
+User --> Client : My Password is xxxx
+note over Client:Verify Password
+deactivate Auth
 
 @enduml
