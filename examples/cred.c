@@ -20,7 +20,17 @@
 #include "fido.h"
 #include "extern.h"
 
-static const unsigned char cdh[32] = {
+// RP
+static const char MY_RPID[] ="gebo8.com";
+static const char MY_RPNAME[] = "gebogebo8";
+
+// USER
+static const unsigned char MY_USERID[] = "geboid";
+static const char MY_USERNAME[] = "user_newgebo";
+static const char MY_USERDISPNAME[] = "user_DISP_newgebo";
+
+//static const unsigned char cdh[32] = {
+static unsigned char cdh[32] = {
 	0xf9, 0x64, 0x57, 0xe7, 0x2d, 0x97, 0xf6, 0xbb,
 	0xdd, 0xd7, 0xfb, 0x06, 0x37, 0x62, 0xea, 0x26,
 	0x20, 0x44, 0x8e, 0x69, 0x7c, 0x03, 0xf2, 0x31,
@@ -73,7 +83,7 @@ verify_cred(
 
 	/* relying party */
 	//r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
-	r = fido_cred_set_rp(cred, "gebo6.com", "gebo6");
+	r = fido_cred_set_rp(cred, MY_RPID, MY_RPNAME);
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -124,7 +134,7 @@ verify_cred(
 				errx(1, "write_rsa_pubkey");
 		}
 		printf("----\n");
-		printf("Export PublicKey OK:(%dbyte) ->%s\n", fido_cred_pubkey_len(cred), key_out);
+		printf("Export PublicKey OK:(%dbyte) ->%s\n", (int)(fido_cred_pubkey_len(cred)), key_out);
 	}
 
 	if (id_out != NULL) {
@@ -133,7 +143,7 @@ verify_cred(
 			errx(1, "write_blob");
 		}
 		printf("----\n");
-		printf("Export CredentialID OK:(%dbyte) ->%s\n", fido_cred_id_len(cred), id_out);
+		printf("Export CredentialID OK:(%dbyte) ->%s\n", (int)(fido_cred_id_len(cred)), id_out);
 	} 
 
 	fido_cred_free(&cred);
@@ -215,6 +225,25 @@ main(int argc, char **argv)
 	if (argc != 1)
 		usage();
 
+	// ClientDataHashÇçÏê¨
+	// byte[32]
+	{
+		byte randombuf[33];
+		//byte rundomsha256[SHA256_DIGEST_LENGTH];
+
+		printf("RAND_MAX=%d\n", RAND_MAX);
+		srand((unsigned)time(NULL));
+		printf("%32d\n", rand());
+		sprintf((char*)randombuf, "%32d", rand());
+
+		SHA256_CTX		 ctx;
+		if (SHA256_Init(&ctx) == 0 ||
+			SHA256_Update(&ctx, randombuf, sizeof(randombuf) - 1) == 0 ||
+			SHA256_Final(cdh, &ctx) == 0) {
+			errx(1, "ClientDataHashçÏê¨Error");
+		}
+	}
+
 	fido_init(FIDO_DEBUG);
 	//fido_init(0);
 
@@ -241,7 +270,7 @@ main(int argc, char **argv)
 
 	/* relying party */
 	//r = fido_cred_set_rp(cred, "localhost", "sweet home localhost");
-	r = fido_cred_set_rp(cred, "gebo6.com", "gebo6");
+	r = fido_cred_set_rp(cred, MY_RPID, MY_RPNAME);
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -252,8 +281,8 @@ main(int argc, char **argv)
 	//const unsigned char gebo_id[8] = {
 	//	0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x66
 	//};
-	r = fido_cred_set_user(cred, user_id, sizeof(user_id), "gebo-bo6",
-	    "gebo-bo6", NULL);
+	r = fido_cred_set_user(cred, MY_USERID, sizeof(MY_USERID), MY_USERNAME,
+	    MY_USERDISPNAME, NULL);
 	if (r != FIDO_OK)
 		errx(1, "fido_cred_set_user: %s (0x%x)", fido_strerr(r), r);
 

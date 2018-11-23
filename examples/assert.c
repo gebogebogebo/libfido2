@@ -22,6 +22,10 @@
 #include "extern.h"
 #include <openssl/sha.h>
 
+ // RP
+static const char MY_RPID[] = "gebo8.com";
+
+
 //static const unsigned char cdh[32] = {
 static unsigned char cdh[32] = {
 	0xec, 0x8d, 0x8f, 0x78, 0x42, 0x4a, 0x2b, 0xb7,
@@ -96,7 +100,7 @@ verify_assert(
 
 	/* relying party */
 	//r = fido_assert_set_rp(assert, "localhost");
-	r = fido_assert_set_rp(assert, "gebo6.com");
+	r = fido_assert_set_rp(assert, MY_RPID);
 	if (r != FIDO_OK)
 		errx(1, "fido_assert_set_rp: %s (0x%x)", fido_strerr(r), r);
 
@@ -250,7 +254,7 @@ main(int argc, char **argv)
 
 	/* relying party */
 	//r = fido_assert_set_rp(assert, "localhost");
-	r = fido_assert_set_rp(assert, "gebo6.com");
+	r = fido_assert_set_rp(assert, MY_RPID);
 	if (r != FIDO_OK)
 		errx(1, "fido_assert_set_rp: %s (0x%x)", fido_strerr(r), r);
 

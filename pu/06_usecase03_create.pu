@@ -1,0 +1,56 @@
+@startuml
+title usecase_03_create 
+'hide footbox
+
+actor "User\nUserID=123\n**PIN=gebo99**" as User
+participant "Yubikey" as Yubikey
+box "gebo-Service"
+    participant "Client" as Client
+    database "Database" as Database
+end box 
+
+User <- Client : Who are You?
+User --> Client : My UserID is 123
+note over Client:User is **123**\n(No Verify)
+
+User <- Client : Please Insert Yubikey!
+User --> Client : Insert Yubikey
+Yubikey <-- Client : Connect
+
+group SetPIN
+    User <- Client : Input New PIN
+    User --> Client : Input Keyboard ( **gebo99** )
+
+    Client -> Yubikey:authenticatorClientPIN(0x06)\n・subCommand=getKeyAgreement
+    Client <-- Yubikey:keyAgreement
+    |||
+    Client -> Yubikey:authenticatorClientPIN(0x06)\n・subCommand=setPIN\n・newPinEnc(PIN=**gebo99**)
+    Client <-- Yubikey:ACK
+end
+
+Client -> Database :【INSERT Table】\n CredentialPublicKey
+note over Database:【Table】\n ◆PK:UserID=123
+
+group Create
+    Client -> Yubikey:authenticatorClientPIN(0x06)\n・subCommand=getKeyAgreement
+    Client <-- Yubikey:keyAgreement
+    Client -> Yubikey:authenticatorClientPIN(0x06)\n・subCommand=getPINToken(PIN=gebo99)
+    Client <-- Yubikey:pinToken
+    |||
+    Client -> Yubikey:authenticatorMakeCredential(0x01)\n・**rp(rpid=GEBO-Service)**\n・**user(userID=123)**\n・options(**rk=true**,uv=true)\n・pinAuth
+
+    note over Yubikey:UserPresence ☆Ready★
+    User -> Yubikey :Touch Yubikey
+
+    note over Yubikey:UserPresence OK
+
+    note over Yubikey:【Credential】\n ◆PK:rpid & CredentialID\n ・CredentialPrivateKey\n ・**user(userID)**
+
+    Client <-- Yubikey:Attestation\n・authData(CredentialID,CredentialPublicKey)
+    note over Client:Verify Attestation
+end 
+
+Client -> Database :【UPDATE Table】\n CredentialPublicKey
+note over Database:【Table】\n ◆PK:UserID=123\n・CredentialPublicKey
+
+@enduml

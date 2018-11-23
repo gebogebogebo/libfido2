@@ -1,0 +1,45 @@
+@startuml
+title usecase_01_authentication 
+'hide footbox
+
+participant "Two-Factor Authentication" as Auth
+actor "User\nUserID=123" as User
+participant "Yubikey" as Yubikey
+box "gebo-Service"
+    participant "Client" as Client
+    database "Database" as Database
+end box
+
+note over Database:【Table】\n ◆PK:UserID=123\n・password=xxxx\n・CredentialID\n・CredentialPublicKey
+
+User <- Client : Who are You?
+activate Auth
+note over Auth:**what you know**
+User --> Client : My UserID is 123 and Password is xxxx
+note over Client:Verify Password OK\nUser is **123**
+deactivate Auth
+Client -> Database : **SELECT from Table**
+note over Database:【Table】\n ◆PK:UserID=123 → **CredentialID**
+Client <-- Database : **CredentialID**
+
+activate Auth
+note over Auth:**what you have**
+User <- Client : Please Insert Yubikey!
+User --> Client : Insert Yubikey
+Yubikey <-- Client : Connect
+
+group Authentication
+
+    Client -> Yubikey :authenticatorGetAssertion(0x02)\n・rpid=GEBO-Service\n・allowList(**CredentialID**)\n・options(uv=false)
+    note over Yubikey:【Search Credential】\n ◆PK:rpid & **CredentialID** \n→ CredentialPrivateKey
+
+    Client <-- Yubikey: Assertion\n・redential(**CredentialID**)\n・signature
+    deactivate Auth
+
+    Client <- Database : CredentialPublicKey
+
+    note over Client:Verify Assertion
+
+end
+
+@enduml
