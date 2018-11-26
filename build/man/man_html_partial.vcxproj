@@ -1,0 +1,416 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{2E97D088-41AF-3BA2-9E4F-8DEBE392B62A}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>man_html_partial</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\CMakeFiles\4a2c545dd5beeefc0e588dcc29b849a2\man_html_partial.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment es256_pk.3 &gt; es256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido.3 &gt; fido.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert.3 &gt; fido_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_allow_cred.3 &gt; fido_assert_allow_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_set.3 &gt; fido_assert_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_verify.3 &gt; fido_assert_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cbor_info.3 &gt; fido_cbor_info.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred.3 &gt; fido_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_exclude.3 &gt; fido_cred_exclude.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_set.3 &gt; fido_cred_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_verify.3 &gt; fido_cred_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_get_assert.3 &gt; fido_dev_get_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_info_manifest.3 &gt; fido_dev_info_manifest.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_make_cred.3 &gt; fido_dev_make_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_open.3 &gt; fido_dev_open.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_io_functions.3 &gt; fido_dev_set_io_functions.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_pin.3 &gt; fido_dev_set_pin.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_strerr.3 &gt; fido_strerr.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment rs256_pk.3 &gt; rs256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-assert.1 &gt; fido2-assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-cred.1 &gt; fido2-cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-token.1 &gt; fido2-token.partial
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_html_partial.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_html_partial</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment es256_pk.3 &gt; es256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido.3 &gt; fido.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert.3 &gt; fido_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_allow_cred.3 &gt; fido_assert_allow_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_set.3 &gt; fido_assert_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_verify.3 &gt; fido_assert_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cbor_info.3 &gt; fido_cbor_info.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred.3 &gt; fido_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_exclude.3 &gt; fido_cred_exclude.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_set.3 &gt; fido_cred_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_verify.3 &gt; fido_cred_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_get_assert.3 &gt; fido_dev_get_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_info_manifest.3 &gt; fido_dev_info_manifest.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_make_cred.3 &gt; fido_dev_make_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_open.3 &gt; fido_dev_open.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_io_functions.3 &gt; fido_dev_set_io_functions.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_pin.3 &gt; fido_dev_set_pin.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_strerr.3 &gt; fido_strerr.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment rs256_pk.3 &gt; rs256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-assert.1 &gt; fido2-assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-cred.1 &gt; fido2-cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-token.1 &gt; fido2-token.partial
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_html_partial.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_html_partial</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment es256_pk.3 &gt; es256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido.3 &gt; fido.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert.3 &gt; fido_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_allow_cred.3 &gt; fido_assert_allow_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_set.3 &gt; fido_assert_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_verify.3 &gt; fido_assert_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cbor_info.3 &gt; fido_cbor_info.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred.3 &gt; fido_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_exclude.3 &gt; fido_cred_exclude.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_set.3 &gt; fido_cred_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_verify.3 &gt; fido_cred_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_get_assert.3 &gt; fido_dev_get_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_info_manifest.3 &gt; fido_dev_info_manifest.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_make_cred.3 &gt; fido_dev_make_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_open.3 &gt; fido_dev_open.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_io_functions.3 &gt; fido_dev_set_io_functions.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_pin.3 &gt; fido_dev_set_pin.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_strerr.3 &gt; fido_strerr.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment rs256_pk.3 &gt; rs256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-assert.1 &gt; fido2-assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-cred.1 &gt; fido2-cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-token.1 &gt; fido2-token.partial
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_html_partial.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_html_partial</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment es256_pk.3 &gt; es256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido.3 &gt; fido.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert.3 &gt; fido_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_allow_cred.3 &gt; fido_assert_allow_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_set.3 &gt; fido_assert_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_assert_verify.3 &gt; fido_assert_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cbor_info.3 &gt; fido_cbor_info.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred.3 &gt; fido_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_exclude.3 &gt; fido_cred_exclude.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_set.3 &gt; fido_cred_set.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_cred_verify.3 &gt; fido_cred_verify.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_get_assert.3 &gt; fido_dev_get_assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_info_manifest.3 &gt; fido_dev_info_manifest.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_make_cred.3 &gt; fido_dev_make_cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_open.3 &gt; fido_dev_open.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_io_functions.3 &gt; fido_dev_set_io_functions.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_dev_set_pin.3 &gt; fido_dev_set_pin.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido_strerr.3 &gt; fido_strerr.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment rs256_pk.3 &gt; rs256_pk.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-assert.1 &gt; fido2-assert.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-cred.1 &gt; fido2-cred.partial
+if %errorlevel% neq 0 goto :cmEnd
+mandoc -T html -O man="%N.html",fragment fido2-token.1 &gt; fido2-token.partial
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_html_partial.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_html_partial</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_html_partial" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\ZERO_CHECK.vcxproj">
+      <Project>{0D5C0129-0405-3800-98F7-C49199F4F853}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\man\man_lint.vcxproj">
+      <Project>{AEE71033-B5EF-38DD-891C-E0D6E7711A70}</Project>
+      <Name>man_lint</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

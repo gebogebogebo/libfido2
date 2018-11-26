@@ -1,0 +1,872 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D066C955-ED71-3756-A38F-D41CEEB60223}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>man_symlink_html</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Utility</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <Midl>
+      <AdditionalIncludeDirectories>C:\Users\suzuki\Documents\GitHub\libfido2\src;C:\libcbor-0.5.0-Win64\include;C:\libressl-2.7.4-Win64\include;C:\hidapi-Win64\hidapi;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\CMakeFiles\4a2c545dd5beeefc0e588dcc29b849a2\man_symlink_html.rule">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_EC_KEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido.html fido_init.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_display_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_icon.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_hmac_salt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_x509.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_user.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_type.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_path.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_vendor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_manufacturer_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_close.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_is_fido2.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_protocol.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_build.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_flags.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_major.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_minor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_get_retry_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_reset.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_RSA.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_symlink_html.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_symlink_html</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_EC_KEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido.html fido_init.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_display_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_icon.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_hmac_salt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_x509.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_user.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_type.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_path.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_vendor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_manufacturer_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_close.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_is_fido2.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_protocol.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_build.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_flags.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_major.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_minor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_get_retry_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_reset.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_RSA.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_symlink_html.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_symlink_html</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_EC_KEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido.html fido_init.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_display_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_icon.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_hmac_salt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_x509.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_user.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_type.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_path.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_vendor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_manufacturer_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_close.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_is_fido2.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_protocol.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_build.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_flags.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_major.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_minor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_get_retry_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_reset.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_RSA.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_symlink_html.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_symlink_html</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'"></Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+cd C:\Users\suzuki\Documents\GitHub\libfido2\build\man
+if %errorlevel% neq 0 goto :cmEnd
+C:
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_EC_KEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs es256_pk.html es256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido.html fido_init.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_hmac_secret_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_display_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_icon.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_name.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_user_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert.html fido_assert_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_hmac_salt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_assert_set.html fido_assert_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_authdata_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_clientdata_hash_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_id_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_pubkey_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_sig_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred.html fido_cred_x5c_len.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_authdata.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_x509.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_sig.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_clientdata_hash.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_rp.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_user.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_extensions.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_options.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_fmt.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_cred_set.html fido_cred_set_type.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_path.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_vendor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_manufacturer_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_info_manifest.html fido_dev_info_product_string.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_close.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_is_fido2.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_protocol.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_build.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_flags.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_major.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_open.html fido_dev_minor.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_get_retry_count.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs fido_dev_set_pin.html fido_dev_reset.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_new.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_free.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_RSA.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_from_ptr.html
+if %errorlevel% neq 0 goto :cmEnd
+ln -fs rs256_pk.html rs256_pk_to_EVP_PKEY.html
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/build/CMakeFiles/4a2c545dd5beeefc0e588dcc29b849a2/man_symlink_html.rule;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_symlink_html</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt">
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -HC:/Users/suzuki/Documents/GitHub/libfido2 -BC:/Users/suzuki/Documents/GitHub/libfido2/build --check-stamp-file C:/Users/suzuki/Documents/GitHub/libfido2/build/man/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:/Users/suzuki/Documents/GitHub/libfido2/man/CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;C:\Users\suzuki\Documents\GitHub\libfido2\man\CMakeLists.txt;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\man\CMakeFiles\man_symlink_html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\ZERO_CHECK.vcxproj">
+      <Project>{0D5C0129-0405-3800-98F7-C49199F4F853}</Project>
+      <Name>ZERO_CHECK</Name>
+    </ProjectReference>
+    <ProjectReference Include="C:\Users\suzuki\Documents\GitHub\libfido2\build\man\man_html.vcxproj">
+      <Project>{08A5FF77-4735-392A-8376-6A4F0B3465E2}</Project>
+      <Name>man_html</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

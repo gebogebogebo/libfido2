@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\aes256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\assert.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\authkey.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\blob.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\buf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\cbor.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\cred.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\dev.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\ecdh.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\err.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\es256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\hid.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\info.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\io.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\iso7816.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\log.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\pin.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\reset.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\rs256.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\u2f.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\openbsd-compat\bsd-getpagesize.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\openbsd-compat\explicit_bzero.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\openbsd-compat\explicit_bzero_win32.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\openbsd-compat\recallocarray.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\suzuki\Documents\GitHub\libfido2\openbsd-compat\timingsafe_bcmp.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\suzuki\Documents\GitHub\libfido2\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{543DE4FF-B4E2-3AA3-AD32-B67A75502F80}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

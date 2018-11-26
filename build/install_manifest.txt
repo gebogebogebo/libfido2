@@ -1,0 +1,7 @@
+C:/libfido2-Win64/lib/fido2.lib
+C:/libfido2-Win64/include/fido.h
+C:/libfido2-Win64/include/fido/err.h
+C:/libfido2-Win64/include/fido/es256.h
+C:/libfido2-Win64/include/fido/param.h
+C:/libfido2-Win64/include/fido/rs256.h
+C:/libfido2-Win64/lib/pkgconfig/libfido2.pc
