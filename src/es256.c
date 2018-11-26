@@ -238,11 +238,13 @@ es256_pk_to_EVP_PKEY(const es256_pk_t *k)
 	const int	 nid = NID_X9_62_prime256v1;
 	int		 ok = -1;
 
+	// BIGNUMワーク領域の確保
 	if ((bnctx = BN_CTX_new()) == NULL ||
 	    (x = BN_CTX_get(bnctx)) == NULL ||
 	    (y = BN_CTX_get(bnctx)) == NULL)
 		goto fail;
 
+	// k->x(char)をBIGNUM型に変換する（BIGNUMは巨大な数値を扱うint型)
 	if (BN_bin2bn(k->x, sizeof(k->x), x) == NULL ||
 	    BN_bin2bn(k->y, sizeof(k->y), y) == NULL) {
 		log_debug("%s: BN_bin2bn", __func__);
