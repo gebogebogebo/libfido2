@@ -85,9 +85,13 @@ fido_dev_authkey_wait(fido_dev_t *dev, es256_pk_t *authkey, int ms)
 {
 	int r;
 
-	if ((r = fido_dev_authkey_tx(dev)) != FIDO_OK ||
-	    (r = fido_dev_authkey_rx(dev, authkey, ms)) != FIDO_OK)
+	if ((r = fido_dev_authkey_tx(dev)) != FIDO_OK) {
 		return (r);
+	}
+
+	if ((r = fido_dev_authkey_rx(dev, authkey, ms)) != FIDO_OK) {
+		return (r);
+	}
 
 	return (FIDO_OK);
 }

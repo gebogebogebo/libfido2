@@ -93,59 +93,196 @@ fail:
 	return (ok);
 }
 
-int
-fido_do_ecdh(
-		fido_dev_t *dev,
-		es256_pk_t **pk,		// ( O)‚±‚±‚Å¶¬‚µ‚½ŒöŠJŒ®(bG)
-		fido_blob_t **ecdh		// ( O)Sheared Secret
-		)
+int fido_createSharedSecret(
+	es256_pk_t *public_key_aG,		// (I )Yubikey‚©‚çæ“¾‚µ‚½ŒöŠJŒ®
+	es256_pk_t **public_key_bG,		// ( O)‚±‚±‚Å¶¬‚µ‚½ŒöŠJŒ®(bG)
+	fido_blob_t **shearedSecret		// ( O)Sheared Secret
+)
 {
-	es256_sk_t	*sk = NULL; /* our private key */
-	es256_pk_t	*ak = NULL; /* authenticator's public key */
+	es256_sk_t	*private_key_b = NULL; /* our private key */
 	int		 r;
 
-	*pk = NULL; /* our public key; returned */
-	*ecdh = NULL; /* shared ecdh secret; returned */
+	*public_key_bG = NULL; /* our public key; returned */
+	*shearedSecret = NULL; /* shared ecdh secret; returned */
 
-	if ((sk = es256_sk_new()) == NULL || (*pk = es256_pk_new()) == NULL) {
+	if ((private_key_b = es256_sk_new()) == NULL || (*public_key_bG = es256_pk_new()) == NULL) {
 		r = FIDO_ERR_INTERNAL;
 		goto fail;
 	}
 
 	// sk=”é–§Œ®(b)‚Æpk=ŒöŠJŒ®(bG)‚ğ¶¬
 	//  ECDH P-256 key pair
-	if (es256_sk_create(sk) < 0 || es256_derive_pk(sk, *pk) < 0) {
+	if (es256_sk_create(private_key_b) < 0 || es256_derive_pk(private_key_b, *public_key_bG) < 0) {
 		log_debug("%s: es256_derive_pk", __func__);
 		r = FIDO_ERR_INTERNAL;
 		goto fail;
 	}
 
+	// log
+	log_debug("---");
+	log_debug("%s:yPrivate Key-bz ‚±‚±‚Å¶¬‚µ‚½”é–§Œ®(COSE ES256 (ECDSA over P-256 with SHA-256))", __func__);
+	log_xxd(private_key_b->d, 32);
+	log_debug("---");
+	log_debug("%s:yPublic Key-bGz‚±‚±‚Å¶¬‚µ‚½ŒöŠJŒ®(COSE ES256 (ECDSA over P-256 with SHA-256) public key))", __func__);
+	log_debug("x");
+	log_xxd((*public_key_bG)->x, 32);
+	log_debug("y");
+	log_xxd((*public_key_bG)->y, 32);
+	log_debug("---");
+	log_debug("%s:yPublic Key-aGzYubikey‚ÌŒöŠJŒ®(COSE ES256 (ECDSA over P-256 with SHA-256) public key))", __func__);
+	log_debug("x");
+	log_xxd((public_key_aG)->x, 32);
+	log_debug("y");
+	log_xxd((public_key_aG)->y, 32);
+	log_debug("---");
+
+	// ‚±‚±‚Å¶¬‚µ‚½”é–§Œ®sk , æ“¾‚µ‚½ŒöŠJŒ®ak
+	// ‚ğ‚à‚Æ‚É sharedSecret ‚ğ¶¬‚·‚é
+	if (do_ecdh(private_key_b, public_key_aG, shearedSecret) < 0) {
+		log_debug("%s: do_ecdh", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	log_debug("---");
+	log_debug("%s:yShared Secretz", __func__);
+	log_xxd((*shearedSecret)->ptr, (*shearedSecret)->len);
+	log_debug("---");
+
+	r = FIDO_OK;
+fail:
+	es256_sk_free(&private_key_b);
+	if (r != FIDO_OK) {
+		es256_pk_free(public_key_bG);
+		fido_blob_free(shearedSecret);
+	}
+
+	return (r);
+}
+
+int
+fido_do_ecdh(
+		fido_dev_t *dev,
+		es256_pk_t **public_key_bG,		// ( O)‚±‚±‚Å¶¬‚µ‚½ŒöŠJŒ®(bG)
+		fido_blob_t **shearedSecret		// ( O)Sheared Secret
+		)
+{
+	es256_pk_t	*public_key_aG = NULL; /* authenticator's public key */
+	int		 r;
+
 	// ‚±‚±‚ÅgetKeyAgreementƒRƒ}ƒ“ƒh‘—M‚µ‚Ä‰“š‚ğ“¾‚é
 	// ak•Ï”‚ÉKeyAgreement(ŒöŠJŒ®aG)
-	if ((ak = es256_pk_new()) == NULL ||
-	    fido_dev_authkey(dev, ak) != FIDO_OK) {
+	if ((public_key_aG = es256_pk_new()) == NULL) {
 		log_debug("%s: fido_dev_authkey", __func__);
 		r = FIDO_ERR_INTERNAL;
 		goto fail;
 	}
 
-	// ‚±‚±‚Å¶¬‚µ‚½”é–§Œ®sk , æ“¾‚µ‚½ŒöŠJŒ®ak
-	// ‚ğ‚à‚Æ‚É sharedSecret ‚ğ¶¬‚·‚é
-	if (do_ecdh(sk, ak, ecdh) < 0) {
-		log_debug("%s: do_ecdh", __func__);
+	if(fido_dev_authkey(dev, public_key_aG) != FIDO_OK) {
+		log_debug("%s: fido_dev_authkey", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+
+	if (fido_createSharedSecret(
+		public_key_aG,
+		public_key_bG,
+		shearedSecret) != FIDO_OK) {
 		r = FIDO_ERR_INTERNAL;
 		goto fail;
 	}
 
 	r = FIDO_OK;
 fail:
-	es256_sk_free(&sk);
-	es256_pk_free(&ak);
+	es256_pk_free(&public_key_aG);
+	return (r);
+}
+
+/*
+int
+fido_do_ecdh(
+	fido_dev_t *dev,
+	es256_pk_t **public_key_bG,		// ( O)‚±‚±‚Å¶¬‚µ‚½ŒöŠJŒ®(bG)
+	fido_blob_t **shearedSecret		// ( O)Sheared Secret
+)
+{
+
+	es256_sk_t	*private_key_b = NULL; // our private key
+	es256_pk_t	*public_key_aG = NULL; // authenticator's public key
+	int		 r;
+
+	// ‚±‚±‚ÅgetKeyAgreementƒRƒ}ƒ“ƒh‘—M‚µ‚Ä‰“š‚ğ“¾‚é
+	// ak•Ï”‚ÉKeyAgreement(ŒöŠJŒ®aG)
+	if ((public_key_aG = es256_pk_new()) == NULL) {
+		log_debug("%s: fido_dev_authkey", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	if (fido_dev_authkey(dev, public_key_aG) != FIDO_OK) {
+		log_debug("%s: fido_dev_authkey", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	*public_key_bG = NULL; // our public key; returned
+	*shearedSecret = NULL; // shared ecdh secret; returned
+
+	if ((private_key_b = es256_sk_new()) == NULL || (*public_key_bG = es256_pk_new()) == NULL) {
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	// sk=”é–§Œ®(b)‚Æpk=ŒöŠJŒ®(bG)‚ğ¶¬
+	//  ECDH P-256 key pair
+	if (es256_sk_create(private_key_b) < 0 || es256_derive_pk(private_key_b, *public_key_bG) < 0) {
+		log_debug("%s: es256_derive_pk", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	// log
+	log_debug("---");
+	log_debug("%s:yPrivate Key-bz ‚±‚±‚Å¶¬‚µ‚½”é–§Œ®(COSE ES256 (ECDSA over P-256 with SHA-256))", __func__);
+	log_xxd(private_key_b->d, 32);
+	log_debug("---");
+	log_debug("%s:yPublic Key-bGz‚±‚±‚Å¶¬‚µ‚½ŒöŠJŒ®(COSE ES256 (ECDSA over P-256 with SHA-256) public key))", __func__);
+	log_debug("x");
+	log_xxd((*public_key_bG)->x, 32);
+	log_debug("y");
+	log_xxd((*public_key_bG)->y, 32);
+	log_debug("---");
+	log_debug("%s:yPublic Key-aGzYubikey‚ÌŒöŠJŒ®(COSE ES256 (ECDSA over P-256 with SHA-256) public key))", __func__);
+	log_debug("x");
+	log_xxd((public_key_aG)->x, 32);
+	log_debug("y");
+	log_xxd((public_key_aG)->y, 32);
+	log_debug("---");
+
+	// ‚±‚±‚Å¶¬‚µ‚½”é–§Œ®sk , æ“¾‚µ‚½ŒöŠJŒ®ak
+	// ‚ğ‚à‚Æ‚É sharedSecret ‚ğ¶¬‚·‚é
+	if (do_ecdh(private_key_b, public_key_aG, shearedSecret) < 0) {
+		log_debug("%s: do_ecdh", __func__);
+		r = FIDO_ERR_INTERNAL;
+		goto fail;
+	}
+
+	log_debug("---");
+	log_debug("%s:yShared Secretz", __func__);
+	log_xxd((*shearedSecret)->ptr, (*shearedSecret)->len);
+	log_debug("---");
+
+	r = FIDO_OK;
+fail:
+	es256_sk_free(&private_key_b);
+	es256_pk_free(&public_key_aG);
 
 	if (r != FIDO_OK) {
-		es256_pk_free(pk);
-		fido_blob_free(ecdh);
+		es256_pk_free(public_key_bG);
+		fido_blob_free(shearedSecret);
 	}
 
 	return (r);
 }
+*/

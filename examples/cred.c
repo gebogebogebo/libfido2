@@ -21,11 +21,11 @@
 #include "extern.h"
 
 // RP
-static const char MY_RPID[] ="gebo8.com";
-static const char MY_RPNAME[] = "gebogebo8";
+static const char MY_RPID[] ="gebo1.com";
+static const char MY_RPNAME[] = "gebogebo1";
 
 // USER
-static const unsigned char MY_USERID[] = "geboid";
+static const unsigned char MY_USERID[] = "geboid1";
 static const char MY_USERNAME[] = "user_newgebo";
 static const char MY_USERDISPNAME[] = "user_DISP_newgebo";
 

@@ -23,7 +23,7 @@
 #include <openssl/sha.h>
 
  // RP
-static const char MY_RPID[] = "gebo8.com";
+static const char MY_RPID[] = "gebo1.com";
 
 
 //static const unsigned char cdh[32] = {
