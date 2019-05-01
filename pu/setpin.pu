@@ -1,0 +1,25 @@
+@startuml
+title setPIN
+'hide footbox
+
+participant "Yubikey" as Yubikey
+participant "setpin.exe" as exe
+
+group (1) KeyAgreementを取得する
+    Yubikey <- exe : authenticatorClientPIN (0x06)\n 0x01 : pinProtocol = 1固定\n 0x02 : subCommand = 0x02:getKeyAgreement
+    Yubikey --> exe : KeyAgreement(Response)
+end
+
+note over exe:(2) My KeyAgreementを生成する
+
+note over exe:(3) sharedSecretを生成する
+
+group (4) PIN設定
+    note over exe:**pinAuth**を生成
+    note over exe:**newPinEnc**を生成
+
+    Yubikey <- exe : authenticatorClientPIN (0x06)\n 0x01 : pinProtocol = 1固定\n 0x02 : subCommand = 0x03:setPIN\n 0x03 : My KeyAgreement = COSE_Key\n 0x04 : pinAuth\n 0x05 : newPinEnc
+    Yubikey --> exe : Result(Response)
+end
+
+@enduml
