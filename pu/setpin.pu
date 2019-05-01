@@ -2,8 +2,8 @@
 title setPIN
 'hide footbox
 
-participant "Yubikey" as Yubikey
 participant "setpin.exe" as exe
+participant "Yubikey" as Yubikey
 
 group (1) KeyAgreementを取得する
     Yubikey <- exe : authenticatorClientPIN (0x06)\n 0x01 : pinProtocol = 1固定\n 0x02 : subCommand = 0x02:getKeyAgreement
